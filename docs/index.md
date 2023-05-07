@@ -1,6 +1,6 @@
 # Archictecture Proposal for IoT Fleet Deployment, Storage and Analysis on AWS
 
-![Architecture Diagram](../img/iots_jems_private.drawio(7).png)
+![Architecture Diagram](img/iots_jems_private.drawio(7).png)
 
 -----------------------------------------
                  
@@ -10,11 +10,15 @@ _IoT Fleewise SDK as well as AWS IoT SDK and other softwares are installed on th
 
 —-----
 
-[Demo auto aws Iot FleetWise](https://github.com/aws4embeddedlinux/demo-auto-aws-iotfleetwise) 
-[Iot-device-simulator](https://github.com/aws-solutions/iot-device-simulator) 
-[Iot Device Simulator](https://docs.aws.amazon.com/solutions/latest/iot-device-simulator/source-code.html) 
-[Iot Fleetwise Edge Development Code](https://github.com/aws/aws-iot-fleetwise-edge/blob/main/docs/dev-guide/edge-agent-dev-guide.md#aws-iot-fleetwise-quick-start-demo?sc_channel=EL&sc_campaign=Live_Streaming_2022_vid&sc_medium=YouTube&sc_content=Pp_ZkcTlFX4&sc_detail=INTERNET_OF_THINGS&sc_country=US) 
-[AWS IoT Fleetwise Insights](https://aws.amazon.com/blogs/iot/generating-insights-from-vehicle-data-with-aws-iot-fleetwise-part1/)  
+[Demo auto aws Iot FleetWise](https://github.com/aws4embeddedlinux/demo-auto-aws-iotfleetwise)<br> 
+
+[Iot-device-simulator](https://github.com/aws-solutions/iot-device-simulator)<br> 
+
+[Iot Device Simulator](https://docs.aws.amazon.com/solutions/latest/iot-device-simulator/source-code.html)<br> 
+
+[Iot Fleetwise Edge Development Code](https://github.com/aws/aws-iot-fleetwise-edge/blob/main/docs/dev-guide/edge-agent-dev-guide.md#aws-iot-fleetwise-quick-start-demo?sc_channel=EL&sc_campaign=Live_Streaming_2022_vid&sc_medium=YouTube&sc_content=Pp_ZkcTlFX4&sc_detail=INTERNET_OF_THINGS&sc_country=US)<br> 
+
+[AWS IoT Fleetwise Insights](https://aws.amazon.com/blogs/iot/generating-insights-from-vehicle-data-with-aws-iot-fleetwise-part1/)<br> 
 
 —-----
 
@@ -22,7 +26,6 @@ _IoT Fleewise SDK as well as AWS IoT SDK and other softwares are installed on th
 ### **IoT Fleetwise vs IoT Core as primary data ingestion AWS service**  
 
 AWS IoT FleetWise (formerly AWS IoT FleetHub) and AWS IoT Core are two separate services designed for different purposes within the AWS IoT ecosystem. Here's a comparison of the two services with a focus on their similarities, differences, advantages, drawbacks, and complementarity in the context of managing a worldwide connected vehicle fleet sending terabytes of data per hour:
-
 
 
 **1. AWS IoT FleetWise:**
@@ -352,14 +355,11 @@ If we only need to store the processed data as CSV files in S3 and do not requir
 
 ### **Kinesis Data Streams et Kinesis Data Firehose**
 
-Deux services AWS qui permettent l'ingestion et le traitement de flux de données en temps réel, mais ils ont des différences clés en termes de fonctionnalités et d'utilisation.
+Kinesis Data Streams is a real-time data streaming service that allows continuous data ingestion, data persistence for 24 hours or more, data processing using Lambda or Amazon Kinesis Client Library, and data replication across multiple AWS regions. Kinesis Data Streams also enables real-time data processing using tools such as Apache Storm, Apache Flink, or Spark Streaming. It is primarily used for use cases requiring low-latency data processing, such as clickstream analysis, fraud detection, or real-time alerts.
 
-Kinesis Data Streams est un service de flux de données en temps réel qui permet l'ingestion de données en continu, la persistance de données pendant 24 heures ou plus, le traitement de données à l'aide de Lambda ou d'Amazon Kinesis Client Library, et la réplication de données à travers plusieurs régions AWS. Kinesis Data Streams permet également de traiter des données en temps réel à l'aide d'outils tels que Apache Storm, Apache Flink ou Spark Streaming. Il est principalement utilisé pour les cas d'usage nécessitant une faible latence de traitement des données, tels que les analyses de flux de clics, les analyses de fraudes ou les alertes en temps réel.
+Kinesis Data Firehose, on the other hand, is a real-time data delivery streaming service that allows routing data to destinations such as Amazon S3, Amazon Redshift, Amazon Elasticsearch, or Amazon Kinesis Data Analytics. Kinesis Data Firehose also performs real-time data transformations using Lambda or third-party software and supports data replication across multiple AWS regions. Kinesis Data Firehose is primarily used for use cases that require simplified real-time data processing, such as real-time data archiving or real-time log analysis.
 
-Kinesis Data Firehose, en revanche, est un service de livraison de flux de données en temps réel qui permet d'acheminer les données vers des destinations telles qu'Amazon S3, Amazon Redshift, Amazon Elasticsearch ou Amazon Kinesis Data Analytics. Kinesis Data Firehose effectue également des transformations de données en temps réel à l'aide de Lambda ou de logiciels tiers, et prend en charge la réplication de données à travers plusieurs régions AWS. Kinesis Data Firehose est principalement utilisé pour les cas d'usage qui nécessitent un traitement simplifié des données en temps réel, tels que l'archivage de données en temps réel ou l'analyse de logs en temps réel.
-
-En résumé, Kinesis Data Streams est un service de flux de données en temps réel pour l'ingestion, le traitement et la persistance de données en continu, tandis que Kinesis Data Firehose est un service de livraison de flux de données en temps réel pour l'acheminement et la transformation de données vers des destinations de stockage ou d'analyse en temps réel.
-
+In summary, Kinesis Data Streams is a real-time data streaming service for the ingestion, processing, and persistence of continuous data, while Kinesis Data Firehose is a real-time data delivery streaming service for routing and transforming data to storage or real-time analysis destinations.
 
 ### **Glue vs Lambda to perform final data cleaning job** 
 
@@ -416,23 +416,23 @@ Overall, it is important to evaluate your performance, cost, and resource manage
 
 ### **Aurora vs Redshift for Data Warehousing**
 
-https://hevodata.com/blog/amazon-rds-to-redshift-etl/ 
+[Aurora vs Redshift]https://hevodata.com/blog/amazon-rds-to-redshift-etl/ 
 
 **Amazon Aurora:**
 
-Est un service de base de données relationnelle compatible avec MySQL et PostgreSQL.
-Convient pour les charges de travail transactionnelles (OLTP) avec des requêtes complexes et des opérations de lecture et d'écriture fréquentes.
-Offre une haute disponibilité, des sauvegardes automatisées et des réplicas pour une meilleure performance de lecture.
-Dans votre cas d'utilisation IoT, Aurora peut être utilisé pour stocker et gérer les données en temps réel provenant de vos capteurs et dispositifs connectés.
+Is a relational database service compatible with MySQL and PostgreSQL.
+Suitable for transactional workloads (OLTP) with complex queries and frequent read and write operations.
+Offers high availability, automated backups, and replicas for better read performance.
+In your IoT use case, Aurora can be used to store and manage real-time data from your sensors and connected devices.
 
 **Amazon Redshift:**
 
-Est un service d'entrepôt de données (data warehouse) conçu pour gérer de grandes quantités de données structurées et semi-structurées.
-Optimisé pour les charges de travail analytiques (OLAP) avec des requêtes d'agrégation et de reporting sur de grands ensembles de données.
-Intègre de manière transparente avec d'autres services AWS tels que S3, Kinesis, et les outils de visualisation de données comme QuickSight.
-Dans votre cas d'utilisation IoT, Redshift peut être utilisé pour stocker, analyser et extraire des informations à partir des données historiques de votre flotte automobile, en fournissant des rapports et des analyses sur les tendances, les performances et les modèles.
+Is a data warehouse service designed to handle large amounts of structured and semi-structured data.
+Optimized for analytical workloads (OLAP) with aggregation and reporting queries on large datasets.
+Integrates seamlessly with other AWS services such as S3, Kinesis, and data visualization tools like QuickSight.
+In your IoT use case, Redshift can be used to store, analyze, and extract insights from historical data of your vehicle fleet, providing reports and analyses on trends, performance, and patterns.
 
-Pour notre cas d'utilisation de flotte automobile IoT, il peut être préférable d'utiliser une combinaison d'Aurora et de Redshift. Aurora peut être utilisé pour gérer les données en temps réel et les opérations transactionnelles, tandis que Redshift peut être utilisé pour stocker et analyser les données historiques à des fins d'analyse et de reporting.
+For our IoT vehicle fleet use case, it may be best to use a combination of Aurora and Redshift. Aurora can be used to manage real-time data and transactional operations, while Redshift can be used to store and analyze historical data for analysis and reporting purposes.
 
 ## **V. Real-time Analytics**
 
@@ -473,19 +473,6 @@ _For real-time analysis, processing and visualization of our vehicle fleets sens
 11. Logging and auditing: Enable logging and auditing for all components in your pipeline using AWS CloudTrail and Amazon CloudWatch Logs. Regularly review logs and audit trails to monitor activity, identify potential issues, and maintain compliance with security requirements.
 
 —-------
-
-
-### **Kinesis Data Streams**
-
-service de flux de données en temps réel qui permet l'ingestion de données en continu, la persistance de données pendant 24 heures ou plus, le traitement de données à l'aide de Lambda ou d'Amazon Kinesis Client Library, et la réplication de données à travers plusieurs régions AWS. Kinesis Data Streams permet également de traiter des données en temps réel à l'aide d'outils tels que Apache Storm, Apache Flink ou Spark Streaming. Il est principalement utilisé pour les cas d'usage nécessitant une faible latence de traitement des données, tels que les analyses de flux de clics, les analyses de fraudes ou les alertes en temps réel.
-
-
-### **Kinesis Data Firehose**
-
-service de livraison de flux de données en temps réel qui permet d'acheminer les données vers des destinations telles qu'Amazon S3, Amazon Redshift, Amazon Elasticsearch ou Amazon Kinesis Data Analytics. Kinesis Data Firehose effectue également des transformations de données en temps réel à l'aide de Lambda ou de logiciels tiers, et prend en charge la réplication de données à travers plusieurs régions AWS. Kinesis Data Firehose est principalement utilisé pour les cas d'usage qui nécessitent un traitement simplifié des données en temps réel, tels que l'archivage de données en temps réel ou l'analyse de logs en temps réel.
-
-En résumé, Kinesis Data Streams est un service de flux de données en temps réel pour l'ingestion, le traitement et la persistance de données en continu, tandis que Kinesis Data Firehose est un service de livraison de flux de données en temps réel pour l'acheminement et la transformation de données vers des destinations de stockage ou d'analyse en temps réel.
-
 
 ### **IoT Analytics vs Kinesis Analytics**
 
@@ -751,7 +738,7 @@ AWS Certificate Manager vs AWS Private CA
 
 Aurora vs Redshift
 
-Why not storing time series directly from Fleetwise to TimestreamDB ? Too high volume, too     much vehicles, we want very high frequency raws datas, timestream will be too messy.
+Why not storing time series directly from Fleetwise to TimestreamDB ? Too high volume, too much vehicles, we want very high frequency raws datas, timestream will be too messy.
 
 Backup, data security, storage, replication ….
 
