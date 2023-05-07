@@ -302,8 +302,6 @@ _The raw datas coming from the IoT Core are passed to Kinesis Firehorse in order
 —---------------- 
 
 
-
-
 ### **Data Warehouse vs DataLake**
 
  Data warehouses and data lakes are both designed for storing and managing large volumes of data, but they serve different purposes and have unique characteristics. Here are the key differences between them:
@@ -416,7 +414,7 @@ Overall, it is important to evaluate your performance, cost, and resource manage
 
 ### **Aurora vs Redshift for Data Warehousing**
 
-[Aurora vs Redshift]https://hevodata.com/blog/amazon-rds-to-redshift-etl/ 
+[Aurora vs Redshift](https://hevodata.com/blog/amazon-rds-to-redshift-etl/) 
 
 **Amazon Aurora:**
 
@@ -438,7 +436,7 @@ For our IoT vehicle fleet use case, it may be best to use a combination of Auror
 
 _For real-time analysis, processing and visualization of our vehicle fleets sensors behaviors, the data coming from IoT Core is send to a kinesis streams which then forward the data to Kinesis Analytics with which we can perform real-time data processing with Analytic Studio. Data is then stored to a Timestream Database connected to Quicksight for real-time fleet visualization._
 
-[Tuto : set up streaming etl pipelines with kinesis data analytics](https://aws.amazon.com/getting-started/hands-on/set-up-streaming-etl-pipelines-apache-flink-and-amazon-kinesis-data-analytics/?ref=gsrchandson) _   _
+[Tuto : set up streaming etl pipelines with kinesis data analytics](https://aws.amazon.com/getting-started/hands-on/set-up-streaming-etl-pipelines-apache-flink-and-amazon-kinesis-data-analytics/?ref=gsrchandson)
 
 ### *Advantages of this pipeline*
 
@@ -479,8 +477,6 @@ _For real-time analysis, processing and visualization of our vehicle fleets sens
 [Query Your Data Streams in Real Time With Kinesis Data Analytics Studio](https://www.youtube.com/watch?v=SX_6x_wXIfA) 
 
 [iot-analytics FAQ](https://www.amazonaws.cn/en/iot-analytics/faq/) 
-
-_Amazon IoT Analytics FAQ_
 
 AWS IoT Analytics and Kinesis Analytics are two different services that can be used for processing and analyzing data from IoT devices.
 
