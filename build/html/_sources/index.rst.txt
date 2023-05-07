@@ -1,3 +1,24 @@
+.. Automotive IoT Sensor Fleet Deployment on AWS : An Architecture Proposal and Documentation documentation master file, created by
+   sphinx-quickstart on Sun May  7 09:51:19 2023.
+   You can adapt this file completely to your liking, but it should at least
+   contain the root `toctree` directive.
+
+Welcome to Automotive IoT Sensor Fleet Deployment on AWS : An Architecture Proposal and Documentation's documentation!
+======================================================================================================================
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+
 # Archictecture Proposal for IoT Fleet Deployment, Storage and Analysis on AWS
 
 ![Architecture Diagram](../img/iots_jems_private.drawio(7).png)
@@ -14,7 +35,7 @@ _IoT Fleewise SDK as well as AWS IoT SDK and other softwares are installed on th
 [Iot-device-simulator](https://github.com/aws-solutions/iot-device-simulator) 
 [Iot Device Simulator](https://docs.aws.amazon.com/solutions/latest/iot-device-simulator/source-code.html) 
 [Iot Fleetwise Edge Development Code](https://github.com/aws/aws-iot-fleetwise-edge/blob/main/docs/dev-guide/edge-agent-dev-guide.md#aws-iot-fleetwise-quick-start-demo?sc_channel=EL&sc_campaign=Live_Streaming_2022_vid&sc_medium=YouTube&sc_content=Pp_ZkcTlFX4&sc_detail=INTERNET_OF_THINGS&sc_country=US) 
-[AWS IoT Fleetwise Insights](https://aws.amazon.com/blogs/iot/generating-insights-from-vehicle-data-with-aws-iot-fleetwise-part1/)  
+[AWS IoT Fleetwise Insights](https://aws.amazon.com/blogs/iot/generating-insights-from-vehicle-data-with-aws-iot-fleetwise-part1/) 
 
 —-----
 
@@ -22,7 +43,6 @@ _IoT Fleewise SDK as well as AWS IoT SDK and other softwares are installed on th
 ### **IoT Fleetwise vs IoT Core as primary data ingestion AWS service**  
 
 AWS IoT FleetWise (formerly AWS IoT FleetHub) and AWS IoT Core are two separate services designed for different purposes within the AWS IoT ecosystem. Here's a comparison of the two services with a focus on their similarities, differences, advantages, drawbacks, and complementarity in the context of managing a worldwide connected vehicle fleet sending terabytes of data per hour:
-
 
 
 **1. AWS IoT FleetWise:**
