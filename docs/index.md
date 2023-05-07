@@ -1,6 +1,6 @@
 # Architecture Principale (Cloud AWS)
 
-![Architecture Diagram](..\img\iots_jems_private.drawio(7).png)
+![Architecture Diagram](../img/iots_jems_private.drawio(7).png)
 
 
 **A faire / Points à éclaircir et à développer**
