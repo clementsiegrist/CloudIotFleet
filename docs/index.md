@@ -1088,33 +1088,11 @@ To deploy this infrastructure globally and to ensure data from vehicles in diffe
 
 **TO DO**
 
-AWS IoT Device Management
-
-Batch analytics / IoT Defenders and Logs bien revoir la pipeline
-
-Déployer les modèles on edge/lambda
-
 IoT Greengrass vs IoT Core vs AppSync
-
-Protocoles de communication
 
 Bien revoir GLUE / Glue vs Step functions / Glue vs EMR [glue-VS-emr](https://www.trianz.com/insights/aws-glue-vs-emr)
 
-Codepipeline/Codebuild
-
-SNS Notification to CYBER Teams
-
-CLoudwatch AWS Ressource Management / Cloudwatch/vs/Cloudtrail
-
-QuickSight/vs/Grafana
-
 Timestream/vs/InfluxDB/vs/DynamoDB/vs/TimescaleDB
-
-Security and log analysis pipeline : AWS Systems Manager Parameter Store vs Timestram for storing logs ? 
-
-Pour le la pipeline batch et cold storage/analysis ===> why not using lambda rather than EMR or athena 
-
-and storing processed query to dynamo DB ===> answer : to moo datas for lambda but athena could be used on our redshift datawarehouse
 
 IoT Analytics vs Kinesis Analytics
 
@@ -1125,5 +1103,3 @@ Aurora vs Redshift
 Why not storing time series directly from Fleetwise to TimestreamDB ? Too high volume, too much vehicles, we want very high frequency raws datas, timestream will be too messy.
 
 Load balancing, autoscaling the services (Firehorse, Streams etc …)
-
-Security Like VPC, subnet, gateway for Services  
