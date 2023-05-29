@@ -22,7 +22,9 @@ _IoT Fleewise SDK as well as AWS IoT SDK and other softwares are installed on th
 
 [AWS IoT Fleetwise Insights](https://aws.amazon.com/blogs/iot/generating-insights-from-vehicle-data-with-aws-iot-fleetwise-part1/)<br> 
 
+[AWS IoT Automotive Workshop](https://catalog.workshops.aws/awsiotforautomotive/en-US/0-before-starting-the-workshop)<br>
 
+[AWS Next Gen Vehicle Communication](https://docs.aws.amazon.com/whitepapers/latest/designing-next-generation-vehicle-communication-aws-iot/challenges-with-connected-vehicle-platforms.html)
 
 —-----
 
@@ -421,6 +423,9 @@ A topic in MQTT is like a message queue or channel that devices and applications
 
 So when you are setting up the rule in AWS IoT Core, the 'topic' in the SQL statement refers to the MQTT topic from which the data will be selected. When a device publishes a message to that topic, the rule will apply the SQL statement to the message. If the message passes the SQL statement (i.e., it matches the SELECT criteria), then the rule's action will be performed on that message.
 
+[AWS IoT SDK and Basic MQTT Functions](https://github.com/aws/aws-iot-device-sdk-python)
+[Implementation AWS MQTT](https://iotatlas.net/en/implementations/aws/)
+
 ## **IV. Datalake/Warehouse creation and Batch Analytics**
 
 _The raw datas coming from the IoT Core are passed to Kinesis Firehorse in order to be stored to a primary raw data S3 bucket in csv. format if needed. Then the raw datas can eventually be processed and refined with EMR and stored for long term usage and query to Redshift which gives data scientist flexibility to analyze and process the very raw datas and be extracted as batch with vehicle informations._  
@@ -608,7 +613,7 @@ _For real-time analysis, processing and visualization of our vehicle fleets sens
 
 [Tuto : set up streaming etl pipelines with kinesis data analytics](https://aws.amazon.com/getting-started/hands-on/set-up-streaming-etl-pipelines-apache-flink-and-amazon-kinesis-data-analytics/?ref=gsrchandson)
 
-### *Advantages of this pipeline*
+### **Advantages of this pipeline**
 
 1. Direct visualization: 
 
@@ -622,7 +627,7 @@ _For real-time analysis, processing and visualization of our vehicle fleets sens
 
     Storing processed data in Amazon Timestream is more optimized for time-series data, which is the focus of our use case. Amazon Timestream provides efficient storage and fast querying capabilities for time-series data, making it suitable for the scenario.
 
-### *Potential Improvements*
+### **Potential Improvements**
 
 1. AWS IoT Analytics: 
 
@@ -668,7 +673,9 @@ _For real-time analysis, processing and visualization of our vehicle fleets sens
 
     Enable logging and auditing for all components in your pipeline using AWS CloudTrail and Amazon CloudWatch Logs. Regularly review logs and audit trails to monitor activity, identify potential issues, and maintain compliance with security requirements.
 
-—-------
+**KinesisStream vs Kafka**
+
+[KinesisStream vs Kafka](https://vitalflux.com/amazon-kinesis-vs-kafka-concepts-differences/)
 
 ### **IoT Analytics vs Kinesis Analytics**
 
@@ -744,7 +751,7 @@ Timestream provides built-in functions for calculating time-series derivatives s
 One potential advantage of using Timestream over other databases is its ability to handle high write and query volumes with low latency. Timestream is designed to scale automatically to handle changing data volumes and query patterns, and can support millions of write requests per second.
 
 
-### Timestream vs MemoryDB for Redis and Elasticache
+### **Timestream vs MemoryDB for Redis and Elasticache**
 
 Amazon MemoryDB for Redis and Amazon ElastiCache are in-memory data store services that are often used for caching, session storage, pub/sub messaging, and real-time analytics. They offer high performance, scalability, and simplicity, but may not be the best fit for every use case. Here are some potential drawbacks in the context of processing time series data from a fleet of IoT vehicles.
 
@@ -841,19 +848,32 @@ In summary, Amazon SageMaker supports several built-in algorithms and deep learn
 
 ## **VII. Sensor Log Analysis and Security  Pipeline**
 
-_This pipeline is used to both analyze problems with the IoT sensors itself as well as with the IoT core Service which is the most important component of our infrastructure. Datas coming from IoT Core is passed to IoT Defender, which is stored with cloudwatch logs, then passed to Kinesis firehose to be store in a influxdb database. Logs are processed and store with a Lambda in a S3 bucket. Final datas can be used in Sagemaker._
+_AWSIoT Device Defender audits IoT devices, detects anomalies, and alerts via Amazon SNS. AWS CloudWatch monitors resources, logs events, and triggers AWS Lambda for certificate rotation tasks. GuardDuty and CloudTrail monitor malicious activities, recording account actions, and facilitating security findings for remediation._
 
 **—-----------------**
 
 
-1. IoT Device Defender is configured to send logs to CloudWatch Logs.
-2. CloudWatch Logs subscriptions are set up to stream the logs to a Kinesis Data Firehose delivery stream.
-3. Kinesis Data Firehose delivery stream is configured to transform the incoming logs to a format suitable for storing in the desired database (e.g., Timestream, InfluxDB).
-4. Kinesis Data Firehose delivery stream delivers the transformed logs to the desired database.
-5. A Lambda function is triggered by the delivery of new data to the database.
-6. The Lambda function processes the data to generate the required time series features.
-7. The Lambda function stores the processed data to the desired format (e.g., CSV) and/or generates the metadata file in XML format.
+1. AWS IoT Device Defender audits IoT devices, detects anomalies, and alerts via Amazon SNS. 
+2. AWS CloudWatch monitors resources, logs events, and triggers AWS Lambda for certificate rotation tasks. 
+3. GuardDuty and CloudTrail monitor malicious activities, recording account actions, and facilitating security findings for remediation.
 
+### **Justifications for Implementing this Pipeline**
+
+We need a log processing and analysis chain that can identify abnormal sensor behavior. Although this logic could be extended to all authorized AWS services, we will focus specifically on the interaction between the vehicles and the first cloud service they connect with.
+
+Implementing this pipeline is essential due to the following reasons:
+
+    1. Monitoring Device Performance: By scrutinizing the failure rates and connection errors among our IoT devices, we gain a deeper understanding of the operational status of our fleet. If a vehicle is transmitting too much or too little data, it might point towards an issue in the vehicle's components or the overall system. This real-time information enables us to pinpoint and resolve potential issues promptly.
+
+    2. Identifying Security Threats: Our system expects a particular transmission frequency from each vehicle - for instance, messages every two minutes. If the frequency suddenly increases to a message every nanosecond, it suggests a significant problem, possibly indicating a security breach like an attack attempt or certificate forgery.
+
+Incorporating services like AWS IoT Device Defender, AWS CloudWatch, GuardDuty, and CloudTrail into our pipeline enhances our ability to audit IoT devices, detect anomalies, and respond swiftly:
+
+    1. AWS IoT Device Defender audits IoT devices, identifies anomalies, and sends alerts via Amazon SNS.
+
+    2. AWS CloudWatch monitors resources, logs events, and triggers AWS Lambda for certificate rotation tasks.
+
+    3. GuardDuty and CloudTrail monitor for malicious activity, record account actions, and facilitate security findings for prompt remediation.
 
 ### **IoT Defender**
 
