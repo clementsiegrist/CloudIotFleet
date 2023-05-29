@@ -1,6 +1,6 @@
 # Archictecture Proposal for IoT Fleet Deployment, Storage and Analysis on AWS
 
-![Architecture Diagram](img/iots_jems_private.drawio(7).png)
+![Architecture Diagram](img/iots_jems_private-Page-1(4).png)
 
 -----------------------------------------
                  
