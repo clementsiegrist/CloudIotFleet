@@ -142,8 +142,6 @@ An OBD Decoder is a tool or software that can interpret these diagnostic trouble
 
 In the context of CAN (Controller Area Network) and OBD, a node can refer to any physical device in a network, including sensors, controllers, or even the OBD port itself. For example, the Engine Control Unit (ECU) can be considered an OBD node, as it communicates with other components in the vehicle through the CAN bus.
 
-The JSON object you provided appears to define a specific sensor node in an OBD system: a sensor measuring "Fuel rail pressure relative to vacuum". This object includes information about the sensor's data type (double), its fully qualified name, a description of what it measures, and its units (kPa). This kind of information would likely be used in software designed to read data from the vehicle and display it to the user in a meaningful way.
-
 ### CAN and DBC 
 
  This is a file format used to describe a Controller Area Network (CAN) system. This format is used by various automotive, industrial, and scientific applications. In a DBC file, the CAN messages and their corresponding signal values are defined.
