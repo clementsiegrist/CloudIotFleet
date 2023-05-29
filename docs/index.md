@@ -303,9 +303,53 @@ In the case of AWS Private CA, a subordinate certificate allows AWS to act as an
 When a client initiates a connection to a server using mTLS, it presents its own digital certificate to the server as proof of its identity. The server then verifies the authenticity of the client's certificate by checking its digital signature against a trusted certificate authority (CA) or a certificate revocation list (CRL).
 
 
-**MQTT** : 
+**MQTT:**
 
+MQTT, which stands for Message Queuing Telemetry Transport, is a publish-subscribe-based messaging protocol that works on top of the TCP/IP protocol. It is designed for connections with remote locations where network bandwidth is limited. MQTT has become one of the main protocols for IoT (Internet of Things) deployments, including connected vehicles, due to its efficiency and reliability.
 
+**MQTT Advantages:** 
+
+1. Lightweight and Efficient: 
+
+    MQTT is designed for constrained devices and networks, which makes it suitable for IoT deployments. The protocol's small size, low power usage, and minimized data packets make it ideal for working in environments where bandwidth is at a premium or network reliability might be intermittent.
+
+2. Publish/Subscribe Model: 
+
+    Unlike traditional client-server architecture, MQTT works on a publish/subscribe model, allowing for one-to-many communication handled asynchronously with a message broker. This model enables efficient communication between multiple devices in a connected car system, for example, without requiring each component to maintain continuous active connections to all other components.
+
+3. Quality of Service (QoS) Levels: 
+
+    MQTT offers three levels of Quality of Service, providing a tradeoff between network bandwidth and message reliability. QoS level 0 delivers messages at most once, QoS level 1 assures that messages are delivered at least once by sending ACKs, and QoS level 2 ensures that messages are delivered exactly once by using a four-step handshake.
+
+4. Retained Messages and Last Will: 
+
+    MQTT allows a message to be "retained" for a topic in the broker, which will then be sent to any newly subscribed client. It also allows a client to specify its "last will and testament" which will be sent by the broker to all subscribers of its topics in case of an unexpected disconnection.
+
+5. Security: 
+
+    Although MQTT itself does not define any specific security mechanisms, it can be secured using traditional TLS/SSL technology, including the use of client certificates for authentication.
+
+**MQTT Advantages for connected car fleets:**
+
+1. Efficient Communication: 
+
+    As the data generated from a fleet of cars can be quite large, MQTT's efficient and lightweight protocol ensures that the data can be transmitted without consuming excessive network resources.
+
+2. Real-Time Updates: 
+
+    The publish/subscribe model enables real-time updates to be sent to and from the cars and the central server, ensuring the timely delivery of critical updates and information.
+
+3. Reliable Delivery: 
+
+    The various QoS levels ensure that the critical data from your cars reach their destination reliably.
+
+4. Scalability: 
+
+    The MQTT protocol can effectively handle the communication between a growing fleet of connected cars and your central system.
+
+5. Security: 
+
+    Using TLS/SSL security with MQTT can ensure that your car fleet's data is transmitted securely, maintaining the integrity and confidentiality of the data.
 
 ## **III. IoT Core for raw Data Ingestion**
 
@@ -673,7 +717,7 @@ _For real-time analysis, processing and visualization of our vehicle fleets sens
 
 **KinesisStream vs Kafka**
 
-[KinesisStream vs Kafka](https://vitalflux.com/amazon-kinesis-vs-kafka-concepts-differences/)
+[KinesisStream vs Kafka concepts and differences](https://vitalflux.com/amazon-kinesis-vs-kafka-concepts-differences/)
 
 ### **IoT Analytics vs Kinesis Analytics**
 
@@ -861,17 +905,21 @@ We need a log processing and analysis chain that can identify abnormal sensor be
 
 Implementing this pipeline is essential due to the following reasons:
 
-    1. Monitoring Device Performance: By scrutinizing the failure rates and connection errors among our IoT devices, we gain a deeper understanding of the operational status of our fleet. If a vehicle is transmitting too much or too little data, it might point towards an issue in the vehicle's components or the overall system. This real-time information enables us to pinpoint and resolve potential issues promptly.
+1. Monitoring Device Performance: 
 
-    2. Identifying Security Threats: Our system expects a particular transmission frequency from each vehicle - for instance, messages every two minutes. If the frequency suddenly increases to a message every nanosecond, it suggests a significant problem, possibly indicating a security breach like an attack attempt or certificate forgery.
+    By scrutinizing the failure rates and connection errors among our IoT devices, we gain a deeper understanding of the operational status of our fleet. If a vehicle is transmitting too much or too little data, it might point towards an issue in the vehicle's components or the overall system. This real-time information enables us to pinpoint and resolve potential issues promptly.
+
+2. Identifying Security Threats: 
+
+    Our system expects a particular transmission frequency from each vehicle - for instance, messages every two minutes. If the frequency suddenly increases to a message every nanosecond, it suggests a significant problem, possibly indicating a security breach like an attack attempt or certificate forgery.
 
 Incorporating services like AWS IoT Device Defender, AWS CloudWatch, GuardDuty, and CloudTrail into our pipeline enhances our ability to audit IoT devices, detect anomalies, and respond swiftly:
 
-    1. AWS IoT Device Defender audits IoT devices, identifies anomalies, and sends alerts via Amazon SNS.
+1. AWS IoT Device Defender audits IoT devices, identifies anomalies, and sends alerts via Amazon SNS.
 
-    2. AWS CloudWatch monitors resources, logs events, and triggers AWS Lambda for certificate rotation tasks.
+2. AWS CloudWatch monitors resources, logs events, and triggers AWS Lambda for certificate rotation tasks.
 
-    3. GuardDuty and CloudTrail monitor for malicious activity, record account actions, and facilitate security findings for prompt remediation.
+3. GuardDuty and CloudTrail monitor for malicious activity, record account actions, and facilitate security findings for prompt remediation.
 
 ### **IoT Defender**
 
@@ -883,9 +931,17 @@ AWS IoT Device Defender provides security and compliance monitoring for IoT devi
 Enable CloudTrail to log all API calls made to IoT Core by going to the AWS Management Console, selecting the CloudTrail service, and creating a new trail. In the trail settings, select the IoT Core API actions that you want to log.
 
 
-1. Set up CloudWatch Alarms to monitor for specific events in your IoT Core environment. For example, you could create an alarm to notify you if there is a sudden increase in the number of failed messages from your connected vehicles.
-2. Create CloudWatch Logs to store the logs generated by CloudTrail. You can configure CloudTrail to deliver the logs directly to CloudWatch Logs, which allows you to view and analyze the logs in near real-time.
-3. Use CloudWatch Metrics to monitor the health of your IoT Core environment. CloudWatch Metrics provide detailed information on the performance of your IoT Core environment, such as message delivery rates, error rates, and connection rates.
+1. Set up CloudWatch Alarms to monitor for specific events in your IoT Core environment : 
+
+    For example, you could create an alarm to notify you if there is a sudden increase in the number of failed messages from your connected vehicles.
+
+2. Create CloudWatch Logs to store the logs generated by CloudTrail : 
+
+    You can configure CloudTrail to deliver the logs directly to CloudWatch Logs, which allows you to view and analyze the logs in near real-time.
+
+3. Use CloudWatch Metrics to monitor the health of your IoT Core environment : 
+
+    CloudWatch Metrics provide detailed information on the performance of your IoT Core environment, such as message delivery rates, error rates, and connection rates.
 
 ## **VIII. Consumers, Users, Administrators**
 
