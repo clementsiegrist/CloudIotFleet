@@ -653,6 +653,14 @@ For our IoT vehicle fleet use case, it may be best to use a combination of Auror
 
 _For real-time analysis, processing and visualization of our vehicle fleets sensors behaviors, the data coming from IoT Core is send to a kinesis streams which then forward the data to Kinesis Analytics with which we can perform real-time data processing with Analytic Studio. Data is then stored to a Timestream Database connected to Quicksight for real-time fleet visualization._
 
+[Kinesis DataStream/Analytics : Demo](https://github.com/liangruibupt/glue-streaming-etl-demo/blob/master/IoT-Kinesis-KinesisDataAnlytics-Demo.md)
+
+[Amazon Timestream for Apache Fink](https://github.com/awslabs/amazon-timestream-tools/tree/mainline/integrations/flink_connector)
+
+[Amazon Kinesis TImestream Grafana](https://github.com/aws-samples/amazon-kinesis-timestream-grafana/tree/main)
+
+[Creating Amazon Timestream interpolated views using Amazon Kinesis Data Analytics for Apache Flink](https://aws.amazon.com/blogs/database/creating-amazon-timestream-interpolated-views-using-amazon-kinesis-data-analytics-for-apache-flink/)
+
 [Tuto : set up streaming etl pipelines with kinesis data analytics](https://aws.amazon.com/getting-started/hands-on/set-up-streaming-etl-pipelines-apache-flink-and-amazon-kinesis-data-analytics/?ref=gsrchandson)
 
 ### **Advantages of this pipeline**
@@ -715,7 +723,7 @@ _For real-time analysis, processing and visualization of our vehicle fleets sens
 
     Enable logging and auditing for all components in your pipeline using AWS CloudTrail and Amazon CloudWatch Logs. Regularly review logs and audit trails to monitor activity, identify potential issues, and maintain compliance with security requirements.
 
-**KinesisStream vs Kafka**
+### **KinesisStream vs Kafka**
 
 [KinesisStream vs Kafka concepts and differences](https://vitalflux.com/amazon-kinesis-vs-kafka-concepts-differences/)
 
@@ -886,6 +894,8 @@ Amazon SageMaker is a fully managed service that enables you to build, train, an
     1D CNNs can also be used for time series analysis, including forecasting and anomaly detection. You can use TensorFlow or PyTorch within SageMaker to implement custom 1D CNN models tailored to your specific time series tasks.
 
 In summary, Amazon SageMaker supports several built-in algorithms and deep learning frameworks that can be used for time series analysis tasks, including DeepAR, Prophet, Random Cut Forest, XGBoost, Seq2Seq, LSTMs, GRUs, and 1D CNNs. Depending on your specific requirements, you can choose the most appropriate model or algorithm for your time series prediction or anomaly detection tasks.
+
+[Automated model refresh with streaming data](https://aws.amazon.com/blogs/machine-learning/automated-model-refresh-with-streaming-data/)
 
 
 ## **VII. Sensor Log Analysis and Security  Pipeline**
